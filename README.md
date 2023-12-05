@@ -1,6 +1,6 @@
 # `Object Diff.`
 
-**`Type Notation`**`.`
+**`Type Notation`**
 
 DateType :
 This can use to format Date format. 

@@ -1,17 +1,21 @@
 apply plugin: 'java-library'
-apply plugin : 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'jacoco'
 
 
 sourceCompatibility = 1.8
-group 'object.diff'
-version = '1.0-SNAPSHOT'
+group 'techcr-utils'
+version = '1.0-RELEASE'
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'object-diff', 'Implementation-Version': version
+        attributes(
+                'Implementation-Title': 'object-diff',
+                'Implementation-Version': archiveVersion
+        )
     }
 }
+
 repositories {
     mavenCentral()
 }
@@ -26,27 +30,15 @@ test {
 jacocoTestReport {
     group = "Reporting"
     description = "Generate Jacoco coverage reports after running tests."
-    additionalSourceDirs = files(sourceSets.main.allJava.srcDirs)
 }
 
 dependencies {
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
 
-    testCompile group: 'org.testng', name: 'testng', version: '6.11'
-    testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
-    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.8.4'
+    testImplementation group: 'org.testng', name: 'testng', version: '6.11'
+    testImplementation group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+    testImplementation group: 'org.mockito', name: 'mockito-all', version: '1.8.4'
 
 }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: 'http://10.16.32.50:8081/repository/maven-releases/') {
-                authentication(userName: 'admin', password: 'admin123');
-            }
-            snapshotRepository(url: 'http://10.16.32.50:8081/repository/maven-snapshots/') {
-                authentication(userName: 'admin', password: 'admin123');
-            }
-        }
-    }
-}
+
